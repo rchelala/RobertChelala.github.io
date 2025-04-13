@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Robert Chelala Portfolio </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>Robert Chelala Portfolio<br />
+						</h1>
+						<p>Aspiring data analyst skilled in SQL,SSRS, and Tableau<a href="https://www.linkedin.com/in/robert-chelala-55915821a/"> @RobertChelala</a> <br />
+						</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">Robert Chelala</a>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="About.html">About Me</a></li>
+							<li><a href="index.html"> Tableau Projects</a></li>
+							<li><a href="SSRS.html"> SSRS Projects</a></li>
+							
+						</ul>
+						<ul class="icons">
+							<li><a href="https://www.linkedin.com/in/robert-chelala-55915821a/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Featured Post -->
+							<article class="post featured">
+								<header class="major">
+									
+									<h2>Who am I?</h2>
+								<p> Hi, I’m Robert Chelala — a Clinical Systems Analyst with over 10 years of healthcare experience, currently at Phoenix Children’s Hospital. 
+									I specialize in optimizing our electronic health record (Altera Sunrise) through configuration, testing, and end-user training. I leverage SQL to support data analysis and enhance these processes.
+									<br /><br />
+									I'm passionate about process improvement, data visualization, and helping healthcare teams make data-driven decisions.
+								</p>
+								</header>
+							</article>
+
+						<!-- Experience Section -->
+							
+							<section class="posts">
+								<section id="experience" class="experience-section">
+									<h2>Experience</h2>
+								  <!--Phoenix Children's Section-->
+									<div class="job">
+									  <h3>Phoenix Children’s</h3>
+									  <span class="job-meta">Jul 2017 - Present · <span id="role2-duration"></span></span>
+									  <br>Phoenix, Arizona, United States</p>
+								  
+									  <div class="job-role">
+										<h4>IT Clinical Systems Analyst</h4>
+										<span class="job-meta">Feb 2021 – Present · <span id="role1-duration"></span></span> Hybrid</p>
+										<div class="skills">
+											Skills: Sunrise Clinical Manager, SQL Server Management Studio, Tableau, SSRS, Jira
+										</div>
+
+									  </div>
+								  
+									  <div class="job-role">
+										<h4>Certified Pharmacy Technician</h4>
+										<span class="job-meta">Jul 2017 – Feb 2021 · 3 yrs 8 mos <span id=""></span></span> · On-site</p>
+										<p class="skills">Skills: Chemotherapy, Oral Compounding, Altera EMR</p>
+									  </div>
+
+									  <div class="job">
+										<h3>Banner Del E. Webb</h3>
+										<span class="job-meta">Full-time · 3 yrs <span id=""></span></span><br>Phoenix, Arizona, United States</p>
+
+										<div class="job-role">
+											<h4>Certified Pharmacy Technician</h4>
+											<span class="job-meta">Jul 2014 – Feb 2017 · 3 yrs <span id=""></span></span>· On-site</p>
+											<div class="skills">
+												Skills: Chemotherapy, Oral Compounding, Cerner EMR</p>
+										</div>
+									</div>
+								  </section>
+							</section>
+						<section class="split contact">
+							<section class="alt">
+								<h3>Location</h3>
+								<p><br />
+								Phoenix, AZ 85041</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(480) 202-4672</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">Robertchelala@gmail.com</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="https://www.linkedin.com/in/robert-chelala-55915821a/" class="icon brands alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				function calculateDuration(startDateStr, endDateStr = new Date()) {
+				  const startDate = new Date(startDateStr);
+				  const endDate = new Date(endDateStr);
+				  let months;
+				  months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
+				  months -= startDate.getMonth();
+				  months += endDate.getMonth();
+				  if (months < 0) months = 0;
+			  
+				  const years = Math.floor(months / 12);
+				  const remainingMonths = months % 12;
+			  
+				  let result = '';
+				  if (years > 0) result += `${years} yr${years > 1 ? 's' : ''}`;
+				  if (remainingMonths > 0) {
+					if (result) result += ' ';
+					result += `${remainingMonths} mo${remainingMonths > 1 ? 's' : ''}`;
+				  }
+			  
+				  return result;
+				}
+			  
+				document.addEventListener("DOMContentLoaded", () => {
+				  document.getElementById("role1-duration").textContent = calculateDuration("2021-02-01");
+				  document.getElementById("role2-duration").textContent = calculateDuration("2017-07-01");
+				});
+			  </script>
+
+	</body>
+</html>
