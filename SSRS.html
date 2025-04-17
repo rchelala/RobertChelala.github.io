@@ -74,6 +74,9 @@
 									</header>
 									<a href="http://stainedaligners/Reports/report/TopHospitalHealthIssues/Report1" class="image fit"><img src="images/Top Hospitals and Physician By Medical Condition.png" alt="" /></a>
 									<p>This report presents a ranked view of the top 10 hospitals by total billing for each medical condition. Users can expand each hospital to view the top 10 physicians within that hospital.</p>
+									<ul class= "actions special">
+										<li><a href="http://stainedaligners/Reports/browse/TopHospitalHealthIssues" class="button">View Project</a></li>
+									</ul>
 									<p>I started building this report by identifying the top 10 hospitals for each medical condition, ranked by total hospital billing.</p>
 									<pre><code><p>WITH TotalHospitalBilling AS (
 									<br>SELECT 
@@ -186,8 +189,6 @@
 									<br>
 									<br>EXECUTE dbo.RankedHospitalsAndRankedDoctors </code> </pre>
 									<p>This stored procedure was then easily integrated into SSRS to generate the final report.</p>
-									<ul class="actions special">
-										<li><a href="http://stainedaligners/Reports/browse/TopHospitalHealthIssues" class="button">View Project</a></li>
 									</ul>
 								</article>
 								<!-- <article>
