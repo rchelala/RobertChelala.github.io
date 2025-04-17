@@ -74,6 +74,118 @@
 									</header>
 									<a href="http://stainedaligners/Reports/report/TopHospitalHealthIssues/Report1" class="image fit"><img src="images/Top Hospitals and Physician By Medical Condition.png" alt="" /></a>
 									<p>This report presents a ranked view of the top 10 hospitals by total billing for each medical condition. Users can expand each hospital to view the top 10 physicians within that hospital.</p>
+									<p>I started building this report by identifying the top 10 hospitals for each medical condition, ranked by total hospital billing.</p>
+									<pre><code><p>WITH TotalHospitalBilling AS (
+									<br>SELECT 
+									<br>	hd.Medical_Condition 
+									<br>	,hd.Hospital 
+									<br>	,SUM(hd.billing_amount) Total_billing 
+									<br>FROM HealthCareKaggle.dbo.healthcare_dataset hd 
+									<br>GROUP BY hd.Medical_Condition, hd.Hospital 
+									<br>),
+									<br>RankedHospital AS (
+									<br>SELECT 
+									<br>	thb.medical_condition
+									<br>	,thb.hospital
+									<br>	,thb.Total_Billing
+									<br>	,ROW_NUMBER() OVER (PARTITION BY thb.medical_condition ORDER BY thb.total_billing DESC) AS Rank
+									<br>FROM totalhospitalbilling thb
+									<br>)
+									<br>SELECT *
+									<br>FROM RankedHospital
+									<br>WHERE rank <= 10</code> </pre>
+									<p>After that, I wanted to drill down further to find the top 10 providers within each of those hospitals, based on individual doctor billing.</p>
+									<pre><code><p>WITH DoctorBilling AS (
+									<br>SELECT
+									<br>	medical_condition
+									<br>	,doctor
+									<br>	,SUM(billing_amount) AS Total_Billing
+									<br>FROM HealthCareKaggle.dbo.healthcare_dataset hd
+									<br>GROUP BY hd.medical_condition, hd.doctor
+									<br>),
+									<br>RankedDoctor AS (
+									<br>SELECT
+									<br>	medical_condition
+									<br>	,doctor
+									<br>	,Total_Billing
+									<br>	,ROW_NUMBER() OVER (PARTITION BY medical_condition ORDER BY total_billing DESC) AS DoctorRank
+									<br>FROM doctorbilling
+									<br>)
+									<br>SELECT 
+									<br>	medical_condition
+									<br>	,doctor
+									<br>	,FORMAT(total_billing,'c') AS DoctorBilling
+									<br>	,doctorrank
+									<br>FROM rankeddoctor
+									<br>WHERE doctorrank <= 10
+									<br>ORDER BY medical_condition </code> </pre>
+									<p>Initially, I used CTEs to structure the logic, but performance became an issue as execution times grew too long.</p>
+									<p>To improve efficiency, I refactored the logic using temporary tables and wrapped the entire process in a stored procedure.</p>
+									<pre><code><p>CREATE PROCEDURE dbo.RankedHospitalsAndRankedDoctors
+									<br>
+									<br>AS
+									<br>
+									<br>BEGIN
+									<br>
+									<br>SET NOCOUNT ON;
+									<br>
+									<br>--Total Hospital Billing
+									<br>SELECT 
+									<br>	hd.Medical_Condition
+									<br>	,hd.Hospital
+									<br>	,SUM(hd.billing_amount) Total_billing
+									<br>INTO #TotalHospitalBilling
+									<br>FROM HealthCareKaggle.dbo.healthcare_dataset hd
+									<br>GROUP BY hd.Medical_Condition, hd.Hospital
+									<br>
+									<br>--Ranked Hospital
+									<br>SELECT 
+									<br>	thb.medical_condition
+									<br>	,thb.hospital
+									<br>	,thb.Total_Billing
+									<br>	,ROW_NUMBER() OVER (PARTITION BY thb.medical_condition ORDER BY thb.total_billing DESC) AS Rank
+									<br>INTO #RankedHospital
+									<br>FROM #totalhospitalbilling thb
+									<br>
+									<br>--DoctorBilling 
+									<br>SELECT
+									<br>	hd.medical_condition
+									<br>	,hd.Hospital
+									<br>	,hd.doctor
+									<br>	,SUM(hd.billing_amount) AS Total_Billing
+									<br>INTO #DoctorBilling
+									<br>FROM HealthCareKaggle.dbo.healthcare_dataset hd
+									<br>GROUP BY hd.medical_condition, hd.doctor,hd.Hospital
+									<br>
+									<br>--Ranked Doctor
+									<br>SELECT
+									<br>	db.medical_condition
+									<br>	,db.hospital
+									<br>	,db.doctor
+									<br>	,db.Total_Billing AS DoctorBilling
+									<br>	,ROW_NUMBER() OVER (PARTITION BY db.medical_condition, db.hospital ORDER BY db.total_billing DESC) AS DoctorRank
+									<br>INTO #RankedDoctor
+									<br>FROM #doctorbilling db
+									<br>
+									<br>SELECT 
+									<br>	rh.medical_condition
+									<br>	,rh.hospital AS Hospital
+									<br>	,FORMAT(rh.total_billing, 'c0') AS Total_Hospital_Billing
+									<br>	,rh.Rank AS HospitalRank
+									<br>	,rd.doctor AS Doctor
+									<br>	,FORMAT(rd.doctorbilling,'c0') AS Doctor_Billing
+									<br>	,rd.DoctorRank
+									<br>FROM #rankedhospital rh
+									<br>LEFT JOIN #RankedDoctor rd
+									<br>	ON rh.medical_condition = rd.medical_condition AND rh.hospital = rd.hospital
+									<br>WHERE rh.rank <= 10 
+									<br>AND (rd.doctorrank <= 10 OR rd.doctorrank IS NULL)
+									<br>ORDER BY rh.medical_condition, rh.rank, rd.doctorrank
+									<br>
+									<br>END
+									<br>
+									<br>EXECUTE dbo.RankedHospitalsAndRankedDoctors </code> </pre>
+									<p>This stored procedure was then easily integrated into SSRS to generate the final report.</p>
 									<ul class="actions special">
 										<li><a href="http://stainedaligners/Reports/browse/TopHospitalHealthIssues" class="button">View Project</a></li>
 									</ul>
