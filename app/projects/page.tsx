@@ -39,6 +39,20 @@ const projects: Project[] = [
 
   // ── APPS ──────────────────────────────────────────────────
   {
+    title: "Cutting Edge Contractors",
+    description:
+      "Web app built for a small contracting business — the evolution of an Excel cost estimation template into a full application with job tracking, markup calculations, labor and material breakdowns, and client-ready PDF exports.",
+    tags: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+    category: "apps",
+    link: "https://cutting-edge-contracting.vercel.app/login",
+    highlights: [
+      "Job cost estimation",
+      "Labor & material breakdowns",
+      "Markup calculations",
+      "PDF export",
+    ],
+  },
+  {
     title: "DAX & SQL Commenter",
     description:
       "AI-powered tool that automatically generates inline documentation for DAX (Power BI) and SQL code. Supports brief, detailed, and step-by-step comment levels.",
