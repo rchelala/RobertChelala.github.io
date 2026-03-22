@@ -18,26 +18,6 @@ interface Project {
 const projects: Project[] = [
   // ── WEBSITES ──────────────────────────────────────────────
   {
-    title: "DeLong Plumbing",
-    description:
-      "Professional website for a plumbing business featuring service listings, contact forms, and a clean service-area focused layout.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    category: "websites",
-    link: "https://delong-plumbing.vercel.app/",
-    github: "https://github.com/rchelala/DeLong-Plumbing",
-    highlights: ["Next.js App Router", "Responsive design", "Deployed on Vercel"],
-  },
-  {
-    title: "Nunez Electrical",
-    description:
-      "Modern website for an electrical services contractor with service pages, project gallery, and lead-generation contact form.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    category: "websites",
-    link: "https://nunez-electrical.vercel.app/",
-    github: "https://github.com/rchelala/nunez-electrical",
-    highlights: ["Next.js App Router", "Service showcase", "Contact lead form"],
-  },
-  {
     title: "Forever After Ink",
     description:
       "Website for a tattoo studio showcasing artist portfolios, booking information, and gallery of completed work.",
